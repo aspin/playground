@@ -23,5 +23,10 @@ defmodule MyList do
     _split(tail, Enum.reverse([ head | front]), index, iter + 1)
   end
 
-  def flatten
+  def flatten(list), do: _flatten(list, [])
+  defp _flatten([], list), do: list
+  defp _flatten([ head | tail ], list) when is_list(head) do
+    _flatten(head, _flatten(tail, []))
+  end
+  defp _flatten([ head | tail ], list), do: [ head | _flatten(tail, list) ]
 end
