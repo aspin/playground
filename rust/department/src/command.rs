@@ -14,11 +14,8 @@ pub fn parse_from_string(input: &str) -> Option<Command> {
         "list_department" => build_list_department(tokens),
         "list" => Some(Command::ListAll),
         "help" => Some(Command::Help),
-        "quit" => Some(Command::Quit),
-        result => {
-            println!("Could not parse: <{}>", result);
-            None
-        },
+        "quit" | "exit" => Some(Command::Quit),
+        _ => None,
     }
 }
 

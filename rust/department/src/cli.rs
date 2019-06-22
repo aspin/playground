@@ -34,9 +34,9 @@ pub fn interact_loop(component_handler: &mut impl FnMut(Command) -> Result<(), E
                 Ok(_) => (),
                 Err(ErrorKind::Interrupted) => break,
                 // Err(error) => println!("Could not execute command {}, because: {}", input, error.)
-                Err(_error) => println!("Could not execute command {}, because: <reason>", input),
+                Err(_error) => println!("Could not execute command \"{}\", because: <reason>", input.trim()),
             },
-            None => println!("Could not parse provided command: {}", input),
+            None => println!("Could not parse provided command: {}", input.trim()),
         }
     }
 }
