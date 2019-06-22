@@ -9,6 +9,8 @@ fn main() {
     assert_eq!(mode(&vec![1, 4, 3, 4]), [4]);
     assert!(mode(&vec![4, 4, 3, 3, 5, 4, 3]).contains(&4));
     assert!(mode(&vec![4, 4, 3, 3, 5, 4, 3]).contains(&3));
+
+    assert_eq!(pig_latinify("nix that apple"), "ixnay hattay applehay")
 }
 
 fn median(v: &Vec<i32>) -> f32 {
@@ -41,3 +43,30 @@ fn mode(v: &Vec<i32>) -> Vec<i32> {
 
     return modes;
 }
+
+fn pig_latinify(s: &str) -> String {
+    let mut builder = String::with_capacity(s.len());
+    for word in s.split(" ") {
+        let mut iterator = word.chars();
+
+        let first_letter = iterator.next().unwrap();
+        let suffix = match first_letter {
+            'a' | 'e' | 'i' | 'o' | 'u' => {
+                builder.push(first_letter);
+                String::from("hay")
+            }
+            letter => {
+                format!("{}ay", letter)
+            }
+        };
+
+        while let Some(character) = iterator.next() {
+            builder.push(character);
+        }
+        builder.push_str(&suffix);
+        builder.push(' ');
+    }
+    return builder.trim().to_string();
+}
+
+
