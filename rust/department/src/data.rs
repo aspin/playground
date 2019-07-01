@@ -13,6 +13,15 @@ impl Company {
             Command::Add(person, department) => {
                 self.add_person(String::from(person), department)
             },
+            Command::AddDepartment(department_name) => {
+                let new_department = Department {
+                    name: String::from(department_name),
+                    description: String::from("default description"),
+                    people: HashSet::new()
+                };
+                self.add_department(String::from(department_name), new_department);
+                Ok(())
+            },
             Command::ListDepartment(department) => {
                 self.print_department(department);
                 Ok(())

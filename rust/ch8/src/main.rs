@@ -10,7 +10,21 @@ fn main() {
     assert!(mode(&vec![4, 4, 3, 3, 5, 4, 3]).contains(&4));
     assert!(mode(&vec![4, 4, 3, 3, 5, 4, 3]).contains(&3));
 
-    assert_eq!(pig_latinify("nix that apple"), "ixnay hattay applehay")
+    assert_eq!(pig_latinify("nix that apple"), "ixnay hattay applehay");
+
+    let excerpt = ImportantExcerpt { part: "foo" };
+    excerpt.announce_and_return_part("hihi");
+}
+
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
+
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("Attention please: {}", announcement);
+        self.part
+    }
 }
 
 fn median(v: &Vec<i32>) -> f32 {
